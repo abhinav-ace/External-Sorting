@@ -2,7 +2,9 @@ from collections import deque
 import os
 
 #Source File
-file="D:\\External Sorting\\Copy of temp_words_1.txt"
+filepath="D:\\External Sorting\\"
+filename="Copy of temp_words_1.txt"
+file=filepath+filename
 
 extra=[]
 
@@ -17,7 +19,7 @@ line=reader.readline()
 
 while line!="":
     if linecount==0:
-        addcurr="D:\\External Sorting\\"+str(filecount)+".txt"
+        addcurr=filepath+str(filecount)+".txt"
         extra.append(addcurr)
         writer=open(addcurr,"w")   
         filecount+=1
@@ -38,9 +40,9 @@ print("DONE SPLITTING")
 #Sorting individual splits
 for i in range(1,filecount):
     arr=[]
-    file="D:\\External Sorting\\"+str(i)+".txt"
+    file=filepath+str(i)+".txt"
     reader=open(file)
-    addcurr="D:\\External Sorting\\"+str(i)+"sorted.txt"
+    addcurr=filepath+str(i)+"sorted.txt"
     extra.append(addcurr)
     writer=open(addcurr,"w")
     line=reader.readline()
@@ -65,9 +67,9 @@ reader=[0]*filecount
 for i in range(filecount):
     arr[i]=deque([])
     
-writer=open("D:\\External Sorting\\FinalSorted.txt","w")
+writer=open(filepath"FinalSorted.txt","w")
 for i in range(1,filecount):
-    reader[i]=open("D:\\External Sorting\\"+str(i)+"sorted.txt")
+    reader[i]=open(filepath+str(i)+"sorted.txt")
     for line in reader[i]:
         if len(arr[i])<1000000:
             arr[i].append(line)
