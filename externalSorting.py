@@ -93,7 +93,7 @@ while arr!=[deque([])]*filecount:
                 else:
                     break
                     
-
+#Removing extra files.
 for i in extra:
     os.remove(i)
     
