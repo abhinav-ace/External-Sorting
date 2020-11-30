@@ -1,20 +1,25 @@
 from collections import deque
+import os
 
 #Source File
 file="D:\\External Sorting\\Copy of temp_words_1.txt"
+
+extra=[]
 
 filecount=1
 linecount=0
 maxlines=10000000
 
 
-#Splitting the file into smaller files with maxlines. 
+#Splitting the file into smaller files with number maxlines. 
 reader=open(file)
 line=reader.readline()
 
 while line!="":
     if linecount==0:
-        writer=open("D:\\External Sorting\\splits\\"+str(filecount)+".txt","w")   
+        addcurr="D:\\External Sorting\\"+str(filecount)+".txt"
+        extra.append(addcurr)
+        writer=open(addcurr,"w")   
         filecount+=1
         
     writer.write(line)
@@ -27,12 +32,17 @@ while line!="":
     line = reader.readline()
 writer.close()
 
+print("DONE SPLITTING")
+
+
 #Sorting individual splits
 for i in range(1,filecount):
     arr=[]
-    file="D:\\External Sorting\\Splits\\"+str(i)+".txt"
+    file="D:\\External Sorting\\"+str(i)+".txt"
     reader=open(file)
-    writer=open("D:\\External Sorting\\Sorted Splits\\"+str(i)+"sorted.txt","w")
+    addcurr="D:\\External Sorting\\"+str(i)+"sorted.txt"
+    extra.append(addcurr)
+    writer=open(addcurr,"w")
     line=reader.readline()
     
     while line!='':
@@ -45,6 +55,9 @@ for i in range(1,filecount):
         writer.write(i)
     writer.close()    
      
+print("SPLITS HAVE BEEN SORTED")
+        
+        
 #Final Merge Step
 arr=[0]*filecount
 reader=[0]*filecount
@@ -54,7 +67,7 @@ for i in range(filecount):
     
 writer=open("D:\\External Sorting\\FinalSorted.txt","w")
 for i in range(1,filecount):
-    reader[i]=open("D:\\External Sorting\\Sorted Splits\\"+str(i)+"sorted.txt")
+    reader[i]=open("D:\\External Sorting\\"+str(i)+"sorted.txt")
     for line in reader[i]:
         if len(arr[i])<1000000:
             arr[i].append(line)
@@ -79,5 +92,10 @@ while arr!=[deque([])]*filecount:
                     arr[ind].append(line)
                 else:
                     break
+                    
 
+for i in extra:
+    os.remove(i)
+    
+    
 print("SUCCESSFULLY SORTED")
